@@ -6,7 +6,7 @@ import scala.util.{Failure, Success, Try}
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration._
 
-object DatabaseClass extends App{
+object DatabaseClass {
 
   println(s"hello world.")
 
@@ -57,7 +57,7 @@ object DatabaseClass extends App{
 //
 //    val result = Await.result(future, 5.seconds)
 
-    println(s"result -----------__> ${rowCount}")
+//    println(s"result -----------__> ${rowCount}")
 
   } finally {
     db.close()
