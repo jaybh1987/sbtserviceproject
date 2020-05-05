@@ -37,8 +37,7 @@ libraryDependencies += "com.typesafe.akka" %% "akka-http-spray-json" % "10.1.11"
 
 libraryDependencies += "com.typesafe.slick" %% "slick" % "3.3.2"
 
-
-
+libraryDependencies += "org.postgresql" % "postgresql" % "9.4-1200-jdbc41"
 
 
 
