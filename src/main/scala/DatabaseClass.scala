@@ -21,8 +21,6 @@ object DatabaseClass extends App{
 
   final case class Users(id: Long = 0l, username: String)
 
-
-
   final case class UsersTable(tag: Tag) extends Table[Users](tag, "users") {
     def id = column[Long]("id", O.PrimaryKey, O.AutoInc)
     def username = column[String]("username")
@@ -36,17 +34,20 @@ object DatabaseClass extends App{
     println(s"---------> ${users.schema.createStatements.mkString}")
 
     def freshTestData = Seq(
-      Users(0, "jay bhavsar"),
-      Users(0, "jay patel"),
-      Users(0, "jay parekh"),
-      Users(0, "jay parikh")
+      Users(0, "amit bhavsar"),
+      Users(0, "amit patel"),
+      Users(0, "amit parekh"),
+      Users(0, "amit parikh")
     )
 
-    val insert : DBIO[Option[Int]] = users ++= freshTestData
+    def findBhavsar = users.filter(_.username.like("Bhavsar")).map(r => r).result
 
-    val result: Future[Option[Int]] = db.run(insert)
+    val r = db.run(findBhavsar)
 
-    val rowCount = Await.result(result, 4.seconds)
+//    val insert : DBIO[Option[Int]] = users ++= freshTestData
+//
+//    val result: Future[Option[Int]] = db.run(insert)
+//    val rowCount = Await.result(result, 4.seconds)
 
 
 
