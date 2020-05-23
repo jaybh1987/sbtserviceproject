@@ -33,9 +33,12 @@ libraryDependencies += "com.typesafe.akka" %% "akka-http"   % "10.1.11"
 libraryDependencies += "com.typesafe.akka" %% "akka-stream" % "2.5.26"
 // https://mvnrepository.com/artifact/com.typesafe.akka/akka-actor
 libraryDependencies += "com.typesafe.akka" %% "akka-actor" % "2.5.26"
-libraryDependencies += "com.typesafe.akka" %% "akka-http-spray-json" % "10.1.11"
+
+libraryDependencies += "com.typesafe.akka" %% "akka-http-spray-json" % "10.1.12"
 
 libraryDependencies += "com.typesafe.slick" %% "slick" % "3.3.2"
+
+
 
 libraryDependencies += "org.postgresql" % "postgresql" % "9.4-1200-jdbc41"
 

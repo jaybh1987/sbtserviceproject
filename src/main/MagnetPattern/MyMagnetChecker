@@ -2,11 +2,13 @@ object MyMagnetChecker {
 
   trait MyMagnet { // should probably be sealed
   type Result
+
     def getRes: Result
     def apply(): Result
   }
 
   object MyMagnet {
+
     implicit def convertFromInt(myVal: Int) = new MyMagnet {
       override type Result = Int
       override def apply(): Result = myVal
@@ -37,3 +39,9 @@ object MyMagnetChecker {
   // Magnet pattern = Instead of method overloading, we use one big pojo with variable amount of fields.
   // Then instead of messy if/else checks on each field of the big pojo to run different init, we use 'implicit' method feature of Scala.
 }
+
+
+
+
+
+
