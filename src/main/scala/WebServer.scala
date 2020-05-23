@@ -4,7 +4,7 @@ import akka.http.scaladsl.server.Directives._
 import akka.stream.{ActorMaterializer, Materializer}
 import spray.json.DefaultJsonProtocol._
 import akka.http.scaladsl.server.Directives
-import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport
+import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
 import spray.json._
 import scala.io.StdIn
 
@@ -25,14 +25,12 @@ object WebServer {
       val route = concat(
         path("orders") {
           post {
-            decodeRequest {
               entity(as[Order]) {
                 order: Order =>
 
                   println(s"order => $order")
                   complete("ok")
               }
-            }
           }
         }
       )
