@@ -5,8 +5,12 @@ import akka.stream.{ActorMaterializer, Materializer}
 import spray.json.DefaultJsonProtocol._
 import akka.http.scaladsl.server.Directives
 import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
+import akka.http.scaladsl.model.StatusCodes
 import spray.json._
+
+import scala.concurrent.Future
 import scala.io.StdIn
+import scala.util.Success
 
 object WebServer {
 
@@ -21,25 +25,37 @@ object WebServer {
     final case class Order(email: String, money: Double)
     implicit val orderFormat = jsonFormat2(Order)
 
-
       val route = concat(
-        path("orders") {
-          post {
-              entity(as[Order]) {
-                order: Order =>
 
-                  println(s"order => $order")
-                  complete("ok")
+
+        path("orders"){
+          post {
+              entity(as[Order]){
+                order: Order =>
+                    val a = DatabaseClass.testInsertAction.map { int =>
+                      println(order)
+                      println(int)
+                    }.recover {
+                      case t => {
+                        println(t.getMessage)
+                        Future.successful(0L)
+                      }
+                    }
+
+                    onComplete(a) {
+                      case Success(v) => complete(StatusCodes.OK)
+                      case _ => complete(StatusCodes.InternalServerError)
+                    }
+                   complete(order.toJson)
               }
           }
-        }
-      )
+        })
 
 
-      val bindingFutures = Http().bindAndHandle(route, "localhost", 8080)
+      val bindingFutures = Http().bindAndHandle(route, "localhost", 9090)
 
 
-      println(s"Server online at http://localhost:8080/\n press RETURN to stop....")
+      println(s"Server online at http://localhost:9090/\n press RETURN to stop....")
 
       StdIn.readLine()  //let it run until user presses return
 
@@ -79,6 +95,9 @@ object WebServer {
 //    }
 
     //route will be implicitly converted to Flow using RouteResult.route2HandlerFlow
+
+
+
 
 
 
