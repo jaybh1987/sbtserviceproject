@@ -39,6 +39,8 @@ libraryDependencies += "com.typesafe.akka" %% "akka-http-spray-json" % "10.1.12"
 libraryDependencies += "com.typesafe.slick" %% "slick" % "3.3.2"
 libraryDependencies += "org.postgresql" % "postgresql" % "9.4-1200-jdbc41"
 
+// https://mvnrepository.com/artifact/com.chuusai/shapeless
+libraryDependencies += "com.chuusai" %% "shapeless" % "2.4.0-M1"
 
 
 
